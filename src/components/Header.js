@@ -5,8 +5,7 @@ import {connect} from 'react-redux';
 class Header extends React.Component {
 
   render() {
-    const { users, userId } = this.props;
-    const user = users.find(user => user.id === userId)
+    const { user } = this.props;
     if (!user) {
       return null;
     }
@@ -18,7 +17,7 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {users: state.users}
+const mapStateToProps = (state, ownProps) => {
+  return {user: state.users.find(user => user.id === ownProps.userId)}
 }
 export default connect(mapStateToProps)(Header);
