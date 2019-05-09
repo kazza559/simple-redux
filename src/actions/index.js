@@ -18,6 +18,9 @@ export const fetchUsers = id => async dispatch => {
   });
 };
 
-export const fetchPostsAndUsers = () => async dispatch => {
-   const 
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
+   await dispatch(fetchPosts());
+   const userIds = new Set(getState().posts.map(post => post.userId))
+   console.log(userIds)
+  userIds.forEach(id => dispatch(fetchUsers(id)));
 }
